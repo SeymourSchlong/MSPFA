@@ -1,0 +1,26 @@
+@use 'lib/styles/themes' as *;
+
+nav {
+	display: flex;
+	justify-content: center;
+	@include theme(font, alt-font);
+	font-size: 9px;
+	line-height: 20px;
+	text-transform: uppercase;
+	flex-wrap: wrap;
+	background-color: #000000;
+	z-index: 400;
+	padding: 0 1ch;
+	color: #bbbbbb;
+
+	&.sticky {
+		position: sticky;
+		top: 0;
+	}
+
+	.divider {
+		height: 1px;
+		background-color: rgba(128, 128, 128, 0.5);
+		margin: 1px 0;
+	}
+}

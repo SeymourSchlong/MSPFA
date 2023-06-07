@@ -1,0 +1,100 @@
+.story-editor {
+	&-page {
+		.view-mode-list &:not(.saved) .story-editor-page-id::after {
+			content: '*';
+		}
+
+		&-id::before {
+			content: 'Page ';
+		}
+
+		&-status {
+			opacity: 0.75;
+
+			&::before {
+				content: '(';
+			}
+
+			&::after {
+				content: ')';
+			}
+		}
+
+		&-toggle-advanced-link {
+			&-container {
+				text-align: center;
+			}
+
+			&.link {
+				font-size: 0.875rem;
+			}
+		}
+
+		&-actions {
+			text-align: right;
+		}
+	}
+
+	&-next-page {
+		&-container > ::before {
+			content: '> ';
+		}
+
+		margin-bottom: 2px;
+
+		&-input {
+			width: 8ch;
+		}
+	}
+}
+
+.page-field {
+	&-container {
+		&-title input {
+			width: 100%;
+		}
+
+		&-content .bb-preview > .spoiler-content {
+			text-align: center;
+		}
+	}
+
+	&-columns {
+		display: flex;
+		align-items: flex-start;
+
+		& > * {
+			width: 50%;
+		}
+
+		& > :last-child {
+			margin-left: 24px;
+			justify-content: right;
+		}
+	}
+}
+
+#story-page-publish {
+	&-field-container-action {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		align-items: center;
+		column-gap: 1ch;
+		row-gap: 0.5ch;
+
+		& > :not(input) {
+			grid-column: 2;
+		}
+
+		.timestamp {
+			opacity: 0.5;
+			font-size: 0.875rem;
+		}
+	}
+
+	&-tip {
+		font-size: 0.875rem;
+		opacity: 0.5;
+		max-width: fit-content;
+	}
+}

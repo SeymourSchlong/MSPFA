@@ -1,0 +1,29 @@
+@use 'components/Comment/styles.module.scss' as *;
+
+.comment {
+	&.with-replies {
+		margin-bottom: 0;
+	}
+
+	&-replies {
+		&-container {
+			font-size: 0.875rem;
+			margin: 0.75em 0 0 ($comment-icon-size + $comment-icon-margin-right);
+		}
+
+		&-action-container {
+			font-size: 0.85em;
+
+			&::before {
+				content: '>';
+				opacity: 0.7;
+				display: inline-block;
+				margin-right: 1ch;
+			}
+		}
+	}
+
+	&.replies-shown + &-replies-container > &-replies-toggle-container::before {
+		transform: rotate(90deg);
+	}
+}

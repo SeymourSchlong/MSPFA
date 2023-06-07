@@ -1,0 +1,19 @@
+.bb-tool {
+	padding: 0;
+
+	.icon {
+		font-size: 1.375rem;
+		background-image: url(/images/bb-toolbar.png);
+		background-size: 1em auto;
+	}
+}
+
+// These styles are to counteract the `font-size` of `textarea`s, so the text can be previewed at the normal size of BB text.
+#field-bb-preview {
+	// This is set on the container rather than the `textarea` itself so that relative `style.fontSize`s set on the `textarea` can use this as a reference point.
+	&-container {
+		font-size: 0.875rem;
+	}
+
+	font-size: 1em;
+}

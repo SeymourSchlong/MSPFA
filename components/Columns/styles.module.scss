@@ -1,0 +1,43 @@
+@use 'lib/styles/themes' as *;
+@use 'components/Section/styles.module' as * with ( $variables-only: true );
+
+.columns {
+	display: flex;
+
+	@include mobile {
+		flex-direction: column;
+	}
+
+	&:not(:last-child) {
+		margin-bottom: 1em;
+
+		&.of-sections {
+			margin-bottom: $space-between-sections;
+		}
+	}
+
+	&:not(.of-sections) > :not(:last-child) {
+		margin-bottom: 1em;
+	}
+
+	@include desktop {
+		& > * {
+			// Each column is a flexbox so its children fill the entire height of the column.
+			display: flex;
+			flex-direction: column;
+			flex-grow: 1;
+			width: 50%;
+			// Undo any vertical margins on the column elements.
+			margin-top: 0 !important;
+			margin-bottom: 0 !important;
+		}
+
+		& > :not(:first-child) {
+			margin-left: 1em;
+		}
+
+		&.of-sections > :not(:first-child) {
+			margin-left: $space-between-sections;
+		}
+	}
+}

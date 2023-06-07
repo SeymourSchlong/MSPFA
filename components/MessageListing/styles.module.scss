@@ -1,0 +1,54 @@
+@use 'lib/styles/themes' as *;
+
+.message-list .listing {
+	box-sizing: content-box;
+	padding-top: 12px;
+
+	&:not(:last-child) {
+		padding-bottom: 12px;
+		border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+	}
+
+	&-selected-label {
+		display: flex;
+		flex-shrink: 0;
+		align-items: center;
+		height: 4em;
+		margin: 0.5em 0.25em 0 -0.75em;
+		padding: 0 0.75em;
+	}
+
+	&:not(.read) .listing-selected-label::before {
+		content: '';
+		display: inline-block;
+		position: absolute;
+		pointer-events: none;
+		left: -24px;
+		width: 6px;
+		height: 4em;
+		background-color: #f48e11;
+	}
+
+	&-content {
+		font-size: 0.875rem;
+	}
+
+	&:not(.open) .listing-content {
+		position: relative;
+		overflow: hidden;
+		text-overflow: ellipsis;
+
+		.bb {
+			// Disable text wrapping when `:not(.open)` so that `text-overflow: ellipsis` works.
+			white-space: nowrap;
+		}
+	}
+}
+
+.mark-read-button .icon {
+	background-image: url(/images/icons/envelope-open.png); // Image credit: seymour schlong
+}
+
+.mark-unread-button .icon {
+	background-image: url(/images/icons/envelope-closed.png); // Image credit: seymour schlong
+}

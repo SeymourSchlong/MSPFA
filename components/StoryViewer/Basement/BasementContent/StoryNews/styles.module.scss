@@ -1,0 +1,18 @@
+.story-news {
+	&-actions {
+		text-align: center;
+	}
+
+	padding: 2px 14px 14px 0;
+
+	&-tip {
+		text-align: center;
+		font-size: 0.875rem;
+	}
+}
+
+#edit-news-tip {
+	font-size: 0.875rem;
+	opacity: 0.5;
+	max-width: fit-content;
+}

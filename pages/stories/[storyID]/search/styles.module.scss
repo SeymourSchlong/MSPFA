@@ -1,0 +1,50 @@
+#story-search {
+	&-section > .section-content {
+		text-align: center;
+	}
+
+	&-actions {
+		margin-bottom: 24px;
+	}
+
+	&-info {
+		margin-top: 1em;
+		font-size: 0.875rem;
+		font-style: italic;
+	}
+}
+
+.search-button .icon {
+	background-image: url(/images/icons/search.png); // Image credit: seymour schlong
+}
+
+.story-search-result {
+	margin-top: 2em;
+
+	&-heading {
+		margin-bottom: 2em;
+	}
+
+	&-id {
+		&::before {
+			content: 'Page ';
+		}
+
+		&::after {
+			content: ' - ';
+		}
+	}
+
+	&-title {
+		white-space: pre-wrap;
+
+		&::before, &::after {
+			content: '"';
+		}
+	}
+
+	&-content {
+		white-space: pre-wrap;
+		font-size: 0.875rem;
+	}
+}

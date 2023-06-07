@@ -1,0 +1,23 @@
+@use 'lib/styles/themes' as *;
+
+#story-editor {
+	&-options {
+		text-align: center;
+	}
+
+	&-misc > .section-content {
+		row-gap: 1em;
+	}
+
+	&-details .row:not(:last-child) {
+		margin-bottom: 2em;
+	}
+}
+
+.label-container.user-array-field-label {
+	align-self: start;
+}
+
+#field-disable-user-theme {
+	margin-left: 1ch;
+}

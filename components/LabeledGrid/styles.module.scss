@@ -1,0 +1,13 @@
+.labeled-grid {
+	display: grid;
+	grid-template-columns: auto auto;
+	justify-content: center;
+	align-content: start;
+	gap: 1ch;
+
+	& > .row {
+		grid-column: 1 / -1;
+		text-align: center;
+		margin: 0 !important;
+	}
+}

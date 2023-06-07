@@ -1,0 +1,63 @@
+@use 'lib/styles/themes' as *;
+
+#dummy {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	// Ensure this element's content is effectively invisible (despite the element still being rendered by the browser).
+	width: 0;
+	height: 0;
+	// Preload the `Homestuck-Regular` font.
+	font-family: Homestuck-Regular;
+}
+
+#page {
+	width: $page-width;
+	margin: 0 auto;
+
+	@include mobile {
+		width: 100%;
+		// Don't set `overflow-x: hidden` here because it breaks child elements with `position: sticky`.
+	}
+}
+
+.mspface {
+	&-container {
+		display: flex;
+		justify-content: space-around;
+		padding: 2px 0 5px;
+	}
+
+	flex-shrink: 0;
+	background-repeat: no-repeat;
+	background-position: center;
+	// The width and height of the MSPFace images.
+	width: 111px;
+	height: 103px;
+
+	@include mobile {
+		display: none;
+	}
+}
+
+main {
+	// For old browsers.
+	display: block;
+
+	&.padded {
+		padding: 16px 56px 56px;
+
+		@include mobile {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+}
+
+#copyright {
+	padding: 0.4em 1.6em;
+	line-height: 1.6;
+	@include theme(font, alt-font);
+	font-size: x-small;
+	text-align: center;
+}

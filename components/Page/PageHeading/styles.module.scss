@@ -1,0 +1,10 @@
+@use 'lib/styles/themes' as *;
+
+.page-heading {
+	@include theme(font, heading-font);
+	font-weight: bold;
+	text-align: center;
+	font-size: 2em;
+	text-transform: uppercase;
+	margin-bottom: 16px;
+}

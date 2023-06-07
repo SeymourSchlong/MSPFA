@@ -1,0 +1,17 @@
+.user-list .listing {
+	&-info {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	&-description {
+		font-size: 0.875rem;
+		overflow: hidden;
+		text-overflow: ellipsis;
+
+		.bb {
+			white-space: nowrap;
+		}
+	}
+}

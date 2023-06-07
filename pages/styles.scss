@@ -1,0 +1,245 @@
+@use 'sass:map';
+@use 'lib/styles/themes' as *;
+
+@font-face {
+	font-family: Homestuck-Regular;
+	src: url(/fonts/Homestuck-Regular/index.eot);
+	src: url(/fonts/Homestuck-Regular/index.eot?#iefix) format('embedded-opentype'),
+		url(/fonts/Homestuck-Regular/index.woff2) format('woff2'),
+		url(/fonts/Homestuck-Regular/index.woff) format('woff'),
+		url(/fonts/Homestuck-Regular/index.ttf) format('truetype'),
+		url(/fonts/Homestuck-Regular/index.svg#Homestuck-Regular) format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+* {
+	outline: none;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-focus-ring-color: transparent;
+	max-width: 100%;
+}
+
+// Load standard theme.
+:root {
+	@each $theme-variable, $value in $standard-theme {
+		--#{$theme-variable}: #{$value};
+	}
+}
+
+// Load all themes other than standard theme.
+@each $theme-id, $theme in map.remove($themes, standard) {
+	.theme-#{$theme-id} {
+		@each $theme-variable, $value in $theme {
+			--#{$theme-variable}: #{$value};
+		}
+	}
+}
+
+body {
+	margin: 0;
+	// This makes the scrollbar not change visibility and offset the page horizontally when changing the page height, for example by toggling tall spoilers on a short page.
+	overflow-y: scroll;
+	@include theme(background-color, back-color);
+	word-break: break-word;
+}
+
+body,
+input,
+// This is to stop the browser from changing the font of the `input` while hovering over autocomplete options.
+input:-webkit-autofill::first-line,
+textarea,
+select,
+option,
+.button {
+	@include theme(font, font);
+	@include theme(color, text-color);
+}
+
+.input-like, input, textarea, select, option {
+	font-size: 0.8333rem;
+	@include theme(background-color, input-color);
+}
+
+.input-like, input, textarea, select {
+	box-sizing: border-box;
+	border-radius: 0;
+	border: 2px solid;
+	@include theme(border-color, input-border-color);
+
+	&:focus {
+		@include theme(border-color, input-focus-border-color);
+	}
+}
+
+.input-like, input, textarea {
+	padding: 0.15em;
+}
+
+input, textarea, select {
+	&:disabled {
+		cursor: default;
+		opacity: 0.7;
+	}
+}
+
+input, select {
+	height: calc(1.425em + 4px);
+	vertical-align: middle;
+}
+
+input[type=checkbox], input[type=radio] {
+	appearance: none;
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+	margin: 3px;
+	padding: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	font-size: 13px;
+}
+
+input[type=checkbox]:checked::before {
+	content: '✔';
+	pointer-events: none;
+
+	@supports (mask: none) {
+		width: 100%;
+		height: 100%;
+		background-color: currentColor;
+		mask-image: url(/images/check.svg);
+		mask-repeat: no-repeat;
+		mask-position: center;
+	}
+}
+
+input[type=radio] {
+	border-radius: 50%;
+
+	&:checked::before {
+		content: '';
+		pointer-events: none;
+		width: 50%;
+		height: 50%;
+		padding: 1px;
+		background-color: currentColor;
+		border-radius: 50%;
+	}
+}
+
+input[type=color] {
+	padding: 0;
+	cursor: pointer;
+
+	&::-webkit-color-swatch-wrapper {
+		padding: 0;
+	}
+
+	// The selectors which include this must be separate, because putting them in the same selector causes the entire selector to become invalid in browsers that don't support even one of them.
+	@mixin color-swatch {
+		border: none;
+	}
+
+	&::-webkit-color-swatch {
+		@include color-swatch;
+	}
+
+	&::-moz-color-swatch {
+		@include color-swatch;
+	}
+}
+
+textarea {
+	resize: vertical;
+	width: 100%;
+	// Prevent the line height from sometimes adding extra space below this.
+	vertical-align: bottom;
+}
+
+select {
+	cursor: pointer;
+
+	&:invalid {
+		// `select` elements are generally only `:invalid` if a disabled option is selected, so this is effectively the `placeholder` attribute color, because `select`s don't have `placeholder`s.
+		// This color code matches Chrome's default.
+		color: #757575;
+	}
+}
+
+label {
+	cursor: pointer;
+}
+
+img {
+	flex-shrink: 0;
+}
+
+iframe {
+	border: none;
+}
+
+map {
+	white-space: normal;
+}
+
+summary {
+	cursor: pointer;
+}
+
+.mid {
+	@include theme(background-color, mid-color);
+}
+
+.front {
+	@include theme(background-color, front-color);
+}
+
+.alt-front {
+	@include theme(background-color, alt-front-color);
+	@include theme(color, alt-text-color);
+}
+
+input, textarea, select, option {
+	@include theme(background-color, input-color);
+}
+
+.spaced {
+	& + & {
+		margin-left: 1ch;
+	}
+}
+
+.translucent {
+	opacity: 0.7;
+
+	&.link:not(:focus):not(:active) {
+		@include theme(color, text-color);
+	}
+}
+
+.red {
+	color: #ff0000;
+}
+
+.bolder {
+	text-shadow: 0.25px 0 currentColor;
+}
+
+.left {
+	text-align: left;
+}
+
+.center {
+	text-align: center;
+}
+
+.right {
+	text-align: right;
+}
+
+.justify {
+	text-align: justify;
+}

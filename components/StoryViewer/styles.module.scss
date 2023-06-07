@@ -1,0 +1,147 @@
+@use 'sass:math';
+@use 'lib/styles/themes' as *;
+
+// This is to mimic the apparent horizontal padding of the page container on http://web.archive.org/web/20141103155157/http://www.mspaintadventures.com/index_hscroll.php?s=6&p=008848.
+$story-page-container-horizontal-padding: math.div(1200px - 1107px, 2);
+$story-page-min-width: 650px;
+$story-page-padding: 25px;
+
+.story {
+	&-section {
+		&-container {
+			display: flex;
+			justify-content: center;
+			padding: 7px $story-page-container-horizontal-padding 23px;
+
+			@include mobile {
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+
+		// For browsers that don't support `width: min-content`.
+		// `display: table` conveniently allows the element's width to dynamically adjust on older browsers in the same way `width: min-content` works on newer browsers.
+		display: table;
+		box-sizing: border-box;
+		padding: 0 $story-page-padding;
+		min-width: $story-page-min-width;
+		// For browsers that don't support `min-content`.
+		width: $story-page-min-width;
+		width: min-content;
+
+		@supports (width: min-content) {
+			// We use `display: block` instead of `display: table` because it is no longer necessary when the browser supports `width: min-content`, which not only dynamically adjusts the element's width as `display: table` would, but also makes it easier for custom styles to change various properties while minimizing the need for repetition.
+			display: block;
+		}
+
+		@include mobile {
+			width: 100%;
+			min-width: 100%;
+		}
+
+		&-title {
+			text-align: center;
+			padding: 14px 5px;
+			font-size: xx-large;
+			// Do not assume the theme's default `font-weight` is `bold`.
+			font-weight: bold;
+		}
+
+		&-content {
+			font-size: 0.875rem;
+			padding: 17px 0;
+
+			#story-page & {
+				text-align: center;
+				padding: 0 0 14px;
+
+				:not(.panel) {
+					// This is necessary so an effect hook can detect the original width of elements to be classed with the `panel` class.
+					max-width: none;
+				}
+			}
+		}
+
+		&-links, &-footer {
+			padding: 17px 0;
+			@include theme(font, alt-font);
+			font-weight: normal;
+		}
+
+		&-links {
+			font-size: x-large;
+		}
+
+		&-link-container::before {
+			content: '> ';
+		}
+
+		&-footer {
+			font-size: 0.875rem;
+
+			&-group {
+				font-size: 0.625rem;
+
+				&-delimiter::before {
+					content: '             ';
+					white-space: pre;
+
+					@include mobile {
+						content: '';
+						display: block;
+						// Separate the lines apart a bit to prevent mistapping.
+						height: 1.5em;
+					}
+				}
+			}
+
+			.link {
+				font-weight: bold;
+			}
+		}
+	}
+
+	&-log-link-container {
+		text-align: center;
+		@include theme(font, alt-font);
+		text-transform: uppercase;
+		margin-bottom: 1em;
+	}
+
+	&-meta {
+		display: flex;
+	}
+
+	&-details {
+		flex-grow: 1;
+		margin-left: 14px;
+
+		& > :not(:last-child) {
+			margin-bottom: 0.5ch;
+		}
+	}
+
+	&-title {
+		@include theme(font, heading-font);
+		font-weight: bold;
+		font-size: 2em;
+	}
+
+	&-description {
+		font-size: 0.875rem;
+	}
+}
+
+.panel {
+	margin: 0 (-$story-page-padding);
+	// For browsers that don't support `stretch`.
+	max-width: $page-width - 2 * $story-page-container-horizontal-padding;
+	max-width: stretch;
+
+	@include mobile {
+		// For browsers that don't support `vw` which might have a viewport width smaller than `$page-width`.
+		max-width: 100%;
+		// We use `vw` instead of `%` because we want to ignore the padding of the container.
+		max-width: 100vw;
+	}
+}

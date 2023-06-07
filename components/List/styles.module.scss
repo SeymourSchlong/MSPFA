@@ -1,0 +1,74 @@
+@use 'lib/styles/themes' as *;
+
+.listing {
+	display: flex;
+	position: relative;
+
+	&:not(:last-child) {
+		padding-bottom: 8px;
+	}
+
+	&:not(:first-child) {
+		padding-top: 8px;
+	}
+
+	&-icon {
+		&-container {
+			display: inline-block;
+			flex-shrink: 0;
+			margin: 8px 16px 0 0;
+			width: 4em;
+			height: 4em;
+		}
+
+		&.icon-image {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	&-info {
+		flex-grow: 1;
+		text-align: left;
+		overflow: hidden;
+	}
+
+	&-title {
+		display: block;
+		@include theme(font, heading-font);
+		font-size: 1.5em;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-decoration: none;
+		// This prevents the bounding box of the link from filling the entire width of the parent.
+		max-width: fit-content;
+
+		&:hover, &:focus, &:active {
+			text-decoration: underline;
+		}
+	}
+
+	&-section {
+		margin: 4px 0;
+	}
+
+	&-actions {
+		display: none;
+		position: absolute;
+		right: 0;
+		image-rendering: pixelated;
+		transform-origin: top right;
+		transform: scale(2);
+
+		.button {
+			margin-right: 0.25em;
+		}
+	}
+
+	@include desktop {
+		&:hover .listing-actions {
+			display: block;
+		}
+	}
+}

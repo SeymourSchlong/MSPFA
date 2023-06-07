@@ -1,0 +1,103 @@
+@use 'sass:map';
+@use 'sass:color';
+@use 'lib/styles/themes' as *;
+
+#story-editor-pages {
+	@include desktop {
+		padding: 0 32px;
+	}
+
+	@include mobile {
+		&.view-mode-grid {
+			padding: 0 10px;
+		}
+	}
+
+	&.disabled {
+		pointer-events: none;
+		opacity: 0.5;
+	}
+
+	&-actions {
+		text-align: center;
+		position: sticky;
+		top: 0;
+		margin: 16px 0;
+		padding: 8px 0;
+
+		nav.sticky ~ * & {
+			top: 20px;
+		}
+
+		&.stuck {
+			z-index: 200;
+			border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+		}
+
+		&:not(.stuck) #story-editor-back-to-top {
+			display: none;
+		}
+	}
+}
+
+.story-editor {
+	&-view-actions {
+		text-align: center;
+	}
+
+	&-page {
+		& > .section-heading {
+			// Even though these are the default `.section-heading` `background-color` and `color`, non-standard themes may overwrite it, so this is to ensure it keeps the standard gray independently of theme.
+			background-color: map.get($standard-theme, alt-front-color);
+			color: map.get($standard-theme, alt-text-color);
+		}
+
+		&.published > .section-heading {
+			background-color: #008407;
+		}
+
+		&.scheduled > .section-heading {
+			background-color: #cc7600;
+		}
+	}
+
+	.view-mode-grid &-page {
+		display: inline-flex;
+		margin: 5px;
+		overflow: hidden;
+		width: 85px;
+		height: 85px;
+		font-size: 0.75rem;
+		cursor: pointer;
+		user-select: none;
+		box-shadow: 2px 2px 0 0 rgba(128, 128, 128, 0.5);
+
+		&.selected {
+			$outline-thickness: 2px;
+			$outline-color: #4864ff;
+
+			outline: $outline-thickness solid $outline-color;
+			outline-offset: -$outline-thickness;
+			box-shadow: 2px 2px 0 0 color.scale($outline-color, $alpha: -50%, $saturation: -25%);
+		}
+
+		& > * {
+			// This is necessary so that `event.target` is set directly to the page tile element on click, rather than any of its children.
+			pointer-events: none;
+		}
+
+		& > .section-heading {
+			text-align: left;
+			margin-bottom: 0;
+
+			&::before {
+				content: 'p';
+			}
+		}
+
+		& > .section-content {
+			padding: 0.75ch;
+			word-break: break-all;
+		}
+	}
+}

@@ -1,0 +1,10 @@
+#message {
+	&-info > .section-content,
+	&:not(.editing) &-content {
+		font-size: 0.875rem;
+	}
+
+	&-actions {
+		margin-top: 1em;
+	}
+}
